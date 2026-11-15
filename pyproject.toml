@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agendalo"
+version = "0.1.0"
+description = "Sistema de gestión de citas y agenda"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest==8.3.3"]
+
+[project.scripts]
+agendalo = "agendalo.__main__:principal"
+
+[tool.pytest.ini_options]
+testpaths = ["pruebas"]
+python_files = ["prueba_*.py"]
+python_functions = ["prueba_*"]
+pythonpath = ["src"]
