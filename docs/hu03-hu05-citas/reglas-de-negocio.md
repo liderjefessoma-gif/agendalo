@@ -59,6 +59,8 @@ Se revisan al reservar (HU03) y al reprogramar (HU04), en este orden:
 
 ## Cómo se reserva una cita (P03)
 
+Ejemplo con el próximo martes = 24/11/2026.
+
 ```
 ===== RESERVAR CITA =====
 DNI del paciente (0 para volver): 45678912
@@ -66,12 +68,13 @@ DNI del paciente (0 para volver): 45678912
 Médicos:
   1. Dr. Luis Fernández Soto — Cardiología — 08:00 a 13:00
   2. Dr. Ana Ríos Paredes — Pediatría — 14:00 a 18:30
+  3. Dr. Carmen Ruiz Paz — Medicina general — 14:00 a 19:00
 Elija el número del médico: 1
-Fecha (DD/MM/AAAA): 25/11/2026
+Fecha (DD/MM/AAAA): 24/11/2026
 Horarios libres: 08:00  08:30  09:30  10:30  11:00  11:30  12:00  12:30
 Hora (HH:MM): 09:30
->> Cita reservada. Código: C0004
-   25/11/2026 09:30 — Dr. Luis Fernández Soto
+>> Cita reservada. Código: C0005
+   24/11/2026 09:30 — Dr. Luis Fernández Soto
 Presione Enter para volver al menú.
 ```
 
@@ -80,12 +83,12 @@ Presione Enter para volver al menú.
 ```
 ===== REPROGRAMAR CITA =====
 Código de cita (0 para volver): C0001
->> Cita actual: 25/11/2026 09:00 — Dr. Luis Fernández Soto
+>> Cita actual: 24/11/2026 09:00 — Dr. Luis Fernández Soto
    Paciente: Ana María Quispe Rojas
-Nueva fecha (DD/MM/AAAA): 26/11/2026
-Horarios libres: 08:00  08:30  09:00  ...
+Nueva fecha (DD/MM/AAAA): 25/11/2026
+Horarios libres: 08:00  08:30  09:00  09:30  10:00  10:30  11:00  11:30  12:00  12:30
 Nueva hora (HH:MM): 11:00
-Cambiar de 25/11/2026 09:00 a 26/11/2026 11:00. ¿Confirmar? (S/N): S
+Cambiar de 24/11/2026 09:00 a 25/11/2026 11:00. ¿Confirmar? (S/N): S
 >> Cita C0001 reprogramada.
 Presione Enter para volver al menú.
 ```
@@ -98,7 +101,7 @@ Presione Enter para volver al menú.
 ```
 ===== CANCELAR CITA =====
 Código de cita (0 para volver): C0001
->> Cita: 26/11/2026 11:00 — Dr. Luis Fernández Soto
+>> Cita: 25/11/2026 11:00 — Dr. Luis Fernández Soto
    Paciente: Ana María Quispe Rojas
 ¿Seguro que desea cancelar esta cita? (S/N): S
 >> Cita C0001 cancelada. El horario quedó libre.
@@ -107,15 +110,19 @@ Presione Enter para volver al menú.
 
 - Si responde N: `>> La cita no se canceló.`
 
-## Pacientes y citas de ejemplo
+## Pacientes, médica y citas de ejemplo
 
 - El registro de pacientes es de HU01. Mientras tanto, el programa empieza con dos pacientes ficticios:
   - **Ana María Quispe Rojas:** DNI 45678912
   - **Jorge Salas Medina:** DNI 41234567
-- Y con tres citas de ejemplo:
-  - **C0001:** Ana María con el Dr. Luis Fernández Soto, 25/11/2026 09:00, Reservada.
-  - **C0002:** Jorge con el Dr. Luis Fernández Soto, 25/11/2026 10:00, Reservada.
-  - **C0003:** Jorge con la Dra. Ana Ríos Paredes, 26/11/2026 14:00, Cancelada.
+- Agrega una médica más, para que haya dos médicos que atienden a la misma hora:
+  - **Dra. Carmen Ruiz Paz:** CMP 072345, Medicina general, L M X J V, 14:00 a 19:00.
+- Y cuatro citas de ejemplo, todas el **próximo martes**, para que nunca queden en el pasado:
+  - **C0001:** Ana María con el Dr. Luis Fernández Soto, 09:00, Reservada.
+  - **C0002:** Jorge con el Dr. Luis Fernández Soto, 10:00, Reservada.
+  - **C0003:** Jorge con la Dra. Ana Ríos Paredes, 14:00, Cancelada.
+  - **C0004:** Ana María con la Dra. Ana Ríos Paredes, 15:00, Reservada.
+- La primera cita nueva que se reserve tendrá el código C0005.
 - Los datos se pierden al cerrar el programa.
 
 ## Criterios de aceptación

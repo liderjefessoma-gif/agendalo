@@ -80,3 +80,40 @@ def validar_hora(texto, inicio=None):
         raise ValueError(">> Error: la hora de inicio debe ser menor que la hora de fin.")
 
     return hora
+
+
+def validar_dni(texto):
+    """Revisa que el DNI tenga 8 dígitos y lo devuelve como texto."""
+    mensaje = ">> Error: el DNI debe tener 8 dígitos numéricos. Intente de nuevo."
+    dni = texto.strip()
+
+    if len(dni) != 8:
+        raise ValueError(mensaje)
+
+    for caracter in dni:
+        if caracter not in DIGITOS:
+            raise ValueError(mensaje)
+
+    return dni
+
+
+def validar_fecha(texto):
+    """Revisa una fecha DD/MM/AAAA y la devuelve como fecha."""
+    try:
+        fecha = datetime.strptime(texto.strip(), "%d/%m/%Y").date()
+    except ValueError:
+        raise ValueError(">> Error: la fecha debe tener el formato DD/MM/AAAA.")
+
+    return fecha
+
+
+def validar_confirmacion(texto):
+    """Recibe S o N y devuelve True si es S o False si es N."""
+    respuesta = texto.strip().upper()
+
+    if respuesta == "S":
+        return True
+    if respuesta == "N":
+        return False
+
+    raise ValueError(">> Error: responda S o N.")
