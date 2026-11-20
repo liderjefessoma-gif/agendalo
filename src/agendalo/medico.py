@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from agendalo.persona import Persona
 
 ESPECIALIDADES = {
@@ -15,6 +17,8 @@ DIAS = {
     "S": "Sábado",
 }
 
+LETRAS_DE_LA_SEMANA = ["L", "M", "X", "J", "V", "S", "D"]
+
 
 class Medico(Persona):
     """Un médico de la clínica, con su especialidad y su horario de atención."""
@@ -30,3 +34,22 @@ class Medico(Persona):
     def describir(self):
         """Devuelve, por ejemplo: Dr. Luis Fernández Soto — Cardiología."""
         return f"Dr. {self.nombre_completo()} — {self.especialidad}"
+
+    def horario_en_texto(self):
+        """Devuelve, por ejemplo: 08:00 a 13:00."""
+        return f"{self.hora_inicio.strftime('%H:%M')} a {self.hora_fin.strftime('%H:%M')}"
+
+    def horarios_del_dia(self, fecha):
+        """Devuelve las horas de sus bloques de 30 minutos en esa fecha, o una lista vacía si no atiende ese día."""
+        letra_del_dia = LETRAS_DE_LA_SEMANA[fecha.weekday()]
+        if letra_del_dia not in self.dias:
+            return []
+
+        horarios = []
+        bloque = datetime.combine(fecha, self.hora_inicio)
+        fin = datetime.combine(fecha, self.hora_fin)
+        while bloque < fin:
+            horarios.append(bloque.time())
+            bloque = bloque + timedelta(minutes=30)
+
+        return horarios
